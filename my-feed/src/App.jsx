@@ -1,14 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './Main.scss'
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import "@fontsource/montserrat"
-import { LoadingScreen } from './components/LoadingScreen'
+import './Main.scss'
+import { Routes, Route } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Startup } from './components/Startup'
+import { HomePage } from './Pages/Homepage';
 
 function App() {
 
   return (
     <>
-      <LoadingScreen />
+      <Routes>
+        <Route element={<Startup />} />
+        <Route index element={<HomePage />} />
+      </Routes>
     </>
   )
 }
