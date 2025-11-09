@@ -2,17 +2,20 @@ import { useState , useRef, useEffect } from "react";
 
 export function PostCreator(){
   const [createPost, setCreatePost] = useState(false);
+  const [mediaFiles, setMediaFiles] = useState([]);
+
   function postEditor(){
     setCreatePost(true);
   }
 
   function postCreator(e){
+    if(mediaFiles.length > 0) return;
     if(e.target.classList.contains('create-post-overlay')) setCreatePost(false);
   }
 
   return (
     <>
-      {createPost && <CreatePost postCreator={postCreator} />}
+      {createPost && <CreatePost mediaFiles={mediaFiles} setMediaFiles={setMediaFiles} postCreator={postCreator} />}
       <div onClick={postEditor} className="post-creator">
         <div className="app-icon">
           <img src="../../public/icons/my-feed.svg" alt="My Feed" />
@@ -22,9 +25,8 @@ export function PostCreator(){
   );
 }
 
-function CreatePost({postCreator}){
+function CreatePost({mediaFiles, setMediaFiles, postCreator}){
   const [fontSize, setFontSize] = useState(16);
-  const [mediaFiles, setMediaFiles] = useState([]);
   const inputField = useRef(null);
   const fontSizeField = useRef(null);
   const fileInput = useRef(null);
@@ -41,7 +43,7 @@ function CreatePost({postCreator}){
     setMediaFiles(prev => prev.filter((_, i) => i !== index));
   }
 
-  function writePost(){
+  const writePost = () => {
     const postText = inputField.current.textContent;
     if(inputField && postText.length > 0){
       inputField.current.classList.remove('empty');
@@ -50,7 +52,7 @@ function CreatePost({postCreator}){
     }
   }
 
-  function adjustFontSize(){
+  const adjustFontSize = () => {
     const size = fontSizeField.current.value;
     if(size > 9){
       setFontSize(size);
@@ -58,11 +60,11 @@ function CreatePost({postCreator}){
     }
   }
 
-  function inputSize(e){
+  const inputSize = (e) => {
     if(e.target.value > 64) e.target.value = 64;
   }
 
-  function enterSize(e){
+  const enterSize = (e) => {
     if(e.key === 'Enter' && e.target.value !== ''){
       adjustFontSize();
     }
@@ -97,7 +99,7 @@ function CreatePost({postCreator}){
                 onChange={handleFiles}
                 type="file"
                 id="fileInput"
-                accept="image/*,video/*"
+                accept="image"
                 multiple
               />
               <div className="media-label">
