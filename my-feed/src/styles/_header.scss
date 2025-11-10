@@ -1,10 +1,15 @@
 header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #FFF;
   background: var(--black);
   padding: 30px 20px 20px;
+  z-index: 2;
   .header-name {
     display: flex;
     align-items: center;

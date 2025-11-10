@@ -1,5 +1,5 @@
 .post-creator {
-  position: absolute;
+  position: fixed;
   bottom: 60px;
   right: 40px;
   background: var(--black);
@@ -7,6 +7,7 @@
   width: 50px;
   border-radius: 50px;
   overflow: hidden;
+  z-index: 2;
   .app-icon {
     height: 100%;
     width: 100%;
@@ -30,6 +31,7 @@
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  padding: 0 20px;
   background: rgba(31, 31, 31, 0.25);
   z-index: 99;
   .create-post {
@@ -37,7 +39,7 @@
     min-height: 300px;
     min-width: 300px;
     max-height: 750px;
-    max-width: 350px;
+    max-width: 450px;
     height: auto;
     width: 100%;
     display: flex;
@@ -100,6 +102,8 @@
           position: absolute;
           top: -2px;
           right: 0;
+          padding: 4px;
+          font-size: 10px;
           color: #fff;
           background: #050505a4;
           border-radius: 20px;
